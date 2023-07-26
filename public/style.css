@@ -47,3 +47,33 @@
     background-color: #4561ff;
     color: #fff;
 }
+
+.users{
+    background-color: bisque;
+    max-width: 1000px;
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.users .headers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.users .headers h3{
+    margin: 20px 90px;
+}
+
+.users .users-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.users .users-list span{
+    margin: 15px 60px;
+}
