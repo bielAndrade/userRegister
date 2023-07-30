@@ -60,6 +60,8 @@ const saveUser = async () => {
         const data = await fetch("http://localhost:3030/api/new", options);
         const obj = await data.json();
         console.log(obj);
+
+        showUsers();
         
     } catch (error) {
         console.log(error);
