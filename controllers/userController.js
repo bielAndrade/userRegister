@@ -39,7 +39,7 @@ const userRegister = {
 
             const response = await User.create(user);
 
-            res.status(201).json({msg: "User created succesfully!"})
+            res.status(201).json({msg: "User created succesfully!"});
         } catch (error) {
             console.log(error);
         }
@@ -49,8 +49,13 @@ const userRegister = {
         try {
             const id = req.params.id
 
-            const response = await User.destroy(id);
-            
+            const response = await User.findByPk(id);
+              
+              if (response) {
+                await response.destroy();
+              }
+
+            res.status(200).json({msg: "User deleted succesfully!"});            
         } catch (error) {
             console.log(error)
         }

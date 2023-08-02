@@ -22,8 +22,8 @@ const showUsers = async () => {
                 <span class="mail-list">${user.email}</span>
                 <span class="phone-list">${user.phone}</span>
                 <div class="interactive-btns">
-                    <span id=${user.id}><ion-icon onclick="deleteUser"(id) class="delete-btn" name="trash-outline"></ion-icon></span>
-                    <span id=${user.id}><ion-icon onclick="editUser"(id) class="edit-btn" name="create-outline"></ion-icon></span> 
+                    <span id=${user.id}><ion-icon onclick="deleteUser(${user.id})" class="delete-btn" name="trash-outline"></ion-icon></span>
+                    <span id=${user.id}><ion-icon onclick="editUser(${user.id})" class="edit-btn" name="create-outline"></ion-icon></span> 
                 </div>
              </div>`
              usersElements += userElement;
@@ -77,7 +77,7 @@ const deleteUser = async (id) => {
             headers: new Headers({'content-type': 'application/json'})
         }
 
-        const data = await fetch(`http:localhost:3030/api/delete/${myId}`, options);
+        const data = await fetch(`http://localhost:3030/api/delete/${myId}`, options);
         showUsers();
 
     } catch (error) {
