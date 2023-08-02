@@ -5,7 +5,11 @@ const userController = require("../controllers/userController");
 
 router.get("/all", (req, res) => userController.getAll(req, res));
 
+router.get("/user/:id", (req, res) => userController.getOne(req, res));
+
 router.post("/new", bodyParser.json(), (req, res) => userController.create(req, res));
+
+router.delete("/delete/:id", (req, res) => userController.delete(req, res));
 
 
 module.exports = router;

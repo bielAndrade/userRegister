@@ -7,9 +7,6 @@ const emailInput = document.getElementById("email-input");
 const phoneInput = document.getElementById("phone-input");
 const birthInput = document.getElementById("birth-input");
 
-const render = async () => {
-    // getUsers();
-}
 
 const showUsers = async () => {
     try {
@@ -24,8 +21,11 @@ const showUsers = async () => {
                 <span class="name-list">${user.name}</span>
                 <span class="mail-list">${user.email}</span>
                 <span class="phone-list">${user.phone}</span>
+                <div class="interactive-btns">
+                    <span id=${user.id}><ion-icon onclick="deleteUser"(id) class="delete-btn" name="trash-outline"></ion-icon></span>
+                    <span id=${user.id}><ion-icon onclick="editUser"(id) class="edit-btn" name="create-outline"></ion-icon></span> 
+                </div>
              </div>`
-
              usersElements += userElement;
         });
 
@@ -67,5 +67,23 @@ const saveUser = async () => {
         console.log(error);
     }
 }
+
+const deleteUser = async (id) => {
+    try {
+        const myId = id;
+
+        const options = {
+            method:"DELETE",
+            headers: new Headers({'content-type': 'application/json'})
+        }
+
+        const data = await fetch(`http:localhost:3030/api/delete/${myId}`, options);
+        showUsers();
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 document.getElementById("saveButton").addEventListener('click', saveUser);

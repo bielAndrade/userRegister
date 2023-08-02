@@ -15,6 +15,12 @@ const userRegister = {
 
     getOne: async (req, res) => {
         try {
+
+            const id = req.params.id
+            
+            const response = await User.findByPk(id);
+            
+            res.status(200).json(response);
             
         } catch (error) {
             console.log(error)
@@ -31,13 +37,22 @@ const userRegister = {
                 birthDay: req.body.birthDay
             }
 
-            console.log(user);
-
             const response = await User.create(user);
 
             res.status(201).json({msg: "User created succesfully!"})
         } catch (error) {
             console.log(error);
+        }
+    },
+
+    delete: async (req, res) => {
+        try {
+            const id = req.params.id
+
+            const response = await User.destroy(id);
+            
+        } catch (error) {
+            console.log(error)
         }
     }
 }
