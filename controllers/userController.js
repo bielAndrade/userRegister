@@ -47,7 +47,7 @@ const userRegister = {
 
     delete: async (req, res) => {
         try {
-            const id = req.params.id
+            const id = req.params.id;
 
             const response = await User.findByPk(id);
               
@@ -57,9 +57,27 @@ const userRegister = {
 
             res.status(200).json({msg: "User deleted succesfully!"});            
         } catch (error) {
-            console.log(error)
+            console.log(error);
+        }
+    },
+
+    edit: async (req, res) => {
+        try {
+            const id = req.params.id;
+
+            const user = {
+                name: req.body.name,
+                email: req.body.email,
+                phone: req.body.phone,
+                birthDay: req.body.birthDay
+            }
+
+
+        } catch (error) {
+            console.log(error);
         }
     }
+
 }
 
 module.exports = userRegister;

@@ -23,7 +23,7 @@ const showUsers = async () => {
                 <span class="phone-list">${user.phone}</span>
                 <div class="interactive-btns">
                     <span id=${user.id}><ion-icon onclick="deleteUser(${user.id})" class="delete-btn" name="trash-outline"></ion-icon></span>
-                    <span id=${user.id}><ion-icon onclick="editUser(${user.id})" class="edit-btn" name="create-outline"></ion-icon></span> 
+                    <span id=${user.id}><ion-icon onclick="userToEdit(${user.id})" class="edit-btn" name="create-outline"></ion-icon></span> 
                 </div>
              </div>`
              usersElements += userElement;
@@ -68,6 +68,7 @@ const saveUser = async () => {
     }
 }
 
+
 const deleteUser = async (id) => {
     try {
         const myId = id;
@@ -81,9 +82,65 @@ const deleteUser = async (id) => {
         showUsers();
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
 
-document.getElementById("saveButton").addEventListener('click', saveUser);
+const userToEdit = async (id) => {
+    try {      
+        const myId = id;
+
+        const data = await fetch(`http://localhost:3030/api/user/${myId}`);
+        const obj = await data.json();
+        console.log(obj);
+            
+        nameInput.value = obj.name;
+        emailInput.value = obj.email;
+        phoneInput.value = obj.phone;
+        birthInput.value = obj.birthDay;
+
+        document.getElementById("saveBtn").classList.remove("save-button");
+        document.getElementById("saveBtn").classList.add("edit-button");
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const editUser = async (id) => {
+    try {
+        const myId = id;
+
+        const name = nameInput.value;
+        const email = emailInput.value;
+        const phone = phoneInput.value;
+        const birthDay = birthInput.value;
+
+        const user = {
+            name,
+            email,
+            phone,
+            birthDay
+        }
+
+        const options = {method:"PATCH",
+        headers: new Headers({'content-type': 'application/json'}),
+        body: JSON.stringify(user)
+        }
+
+        const data = await fetch(`http://localhost:3030/api/edit/${myId}`, options);
+        
+        document.getElementById("saveBtn").classList.remove("edit-button");
+        document.getElementById("saveBtn").classList.add("save-button");
+        showUsers();
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+document.querySelector(".save-button").addEventListener('click', saveUser);
+document.querySelector(".edit-button").addEventListener('click', editUser)

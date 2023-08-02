@@ -56,7 +56,7 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
 }
 
-#saveButton{
+.save-button{
     cursor: pointer;
     width: 100px;
     height: 65px;
@@ -67,7 +67,23 @@ input[type="number"]::-webkit-inner-spin-button {
     transition: all .2s ease-in-out;
 }
 
-#saveButton:hover{
+.save-button:hover{
+    background-color: #fff;
+    color: #4561ff;
+}
+
+.edit-button{
+    cursor: pointer;
+    width: 100px;
+    height: 65px;
+    background-color: #4561ff;
+    color: #fff;
+    font-size: 20px;
+    border: solid 2px #4561ff;
+    transition: all .2s ease-in-out;
+}
+
+.edit-button:hover{
     background-color: #fff;
     color: #4561ff;
 }

@@ -11,5 +11,6 @@ router.post("/new", bodyParser.json(), (req, res) => userController.create(req, 
 
 router.delete("/delete/:id", (req, res) => userController.delete(req, res));
 
+router.patch("/edit/:id", bodyParser.json(), (req, res) => userController.edit(req, res));
 
 module.exports = router;
