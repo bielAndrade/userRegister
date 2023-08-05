@@ -7,6 +7,8 @@ const emailInput = document.getElementById("email-input");
 const phoneInput = document.getElementById("phone-input");
 const birthInput = document.getElementById("birth-input");
 
+let currentId = '';
+
 
 const showUsers = async () => {
     try {
@@ -30,6 +32,12 @@ const showUsers = async () => {
         });
 
         document.querySelector('.users-list').innerHTML = usersElements;
+
+        emailInput.value = '';
+        phoneInput.value = '';
+        nameInput.value = '';
+        birthInput.value = '';
+
 
     } catch (error) {
         console.log(error)
@@ -93,15 +101,13 @@ const userToEdit = async (id) => {
 
         const data = await fetch(`http://localhost:3030/api/user/${myId}`);
         const obj = await data.json();
-        console.log(obj);
             
         nameInput.value = obj.name;
         emailInput.value = obj.email;
         phoneInput.value = obj.phone;
         birthInput.value = obj.birthDay;
 
-        document.getElementById("saveBtn").classList.remove("save-button");
-        document.getElementById("saveBtn").classList.add("edit-button");
+        currentId = myId;
 
     } catch (error) {
         console.log(error);
@@ -109,9 +115,9 @@ const userToEdit = async (id) => {
 }
 
 
-const editUser = async (id) => {
+const editUser = async () => {
     try {
-        const myId = id;
+        const myId = currentId;
 
         const name = nameInput.value;
         const email = emailInput.value;
@@ -132,8 +138,6 @@ const editUser = async (id) => {
 
         const data = await fetch(`http://localhost:3030/api/edit/${myId}`, options);
         
-        document.getElementById("saveBtn").classList.remove("edit-button");
-        document.getElementById("saveBtn").classList.add("save-button");
         showUsers();
         
     } catch (error) {
@@ -141,6 +145,5 @@ const editUser = async (id) => {
     }
 }
 
-
+document.querySelector(".edit-button").addEventListener('click', editUser);
 document.querySelector(".save-button").addEventListener('click', saveUser);
-document.querySelector(".edit-button").addEventListener('click', editUser)

@@ -50,11 +50,12 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.save-btn{
+.buttons{
     background-color: transparent;
     display: flex;
     align-items: center;
 }
+
 
 .save-button{
     cursor: pointer;
@@ -64,6 +65,7 @@ input[type="number"]::-webkit-inner-spin-button {
     color: #fff;
     font-size: 20px;
     border: solid 2px #4561ff;
+    margin: 5px;
     transition: all .2s ease-in-out;
 }
 
@@ -79,6 +81,7 @@ input[type="number"]::-webkit-inner-spin-button {
     background-color: #4561ff;
     color: #fff;
     font-size: 20px;
+    margin: 5px;
     border: solid 2px #4561ff;
     transition: all .2s ease-in-out;
 }

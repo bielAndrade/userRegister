@@ -71,8 +71,14 @@ const userRegister = {
                 phone: req.body.phone,
                 birthDay: req.body.birthDay
             }
+            
+            const response = await User.findByPk(id);
 
+            await response.set(user);
 
+            await response.save();
+
+                res.status(200).json({msg: "User updated succesfully!"});
         } catch (error) {
             console.log(error);
         }
